@@ -16,4 +16,16 @@ def start(message):
     markup.add(key_portfolio, key_quotations)
     bot.send_message(message.chat.id, start_message, reply_markup=markup)  # третий аргумент - меняем клавиатуру на кнопочную
 
+@bot.message_handler(commands=['back'])
+def back(message):
+    back_message = 'Привет! Это финансовый бот, который позволит тебе упростить работу с акциями!\n\n' + \
+                    'Команды:\n\n' + \
+                    '/quotations - Посмотреть котировки \n' + \
+                    '/portfolio - Посмотреть портфель\n'
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    key_quotations = types.KeyboardButton(text='Котировки')
+    key_portfolio = types.KeyboardButton(text='Портфель')
+    markup.add(key_portfolio, key_quotations)
+    bot.send_message(message.chat.id, back_message, reply_markup=markup)
+
 bot.polling(none_stop=True, interval=0)
