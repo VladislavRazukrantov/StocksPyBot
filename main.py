@@ -37,5 +37,13 @@ def get_title_of_stock(message): #после ввода пользователе
     answer = 'Мы нашли введенную акцию!'
     bot.send_message(message.chat.id, answer)
 
+@bot.message_handler(content_types=['text']) #обработка текстового сообщения
+def random_answers(message):
+    if message.text == 'Котировки':
+        quotations(message)
+    if message.text == 'Портфель':
+        bot.send_message(message.chat.id, 'Мы в портфеле')
+    if message.text == 'Вернуться в меню':
+        back(message)
 
 bot.polling(none_stop=True, interval=0)
