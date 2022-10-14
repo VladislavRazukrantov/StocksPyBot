@@ -28,4 +28,14 @@ def back(message):
     markup.add(key_portfolio, key_quotations)
     bot.send_message(message.chat.id, back_message, reply_markup=markup)
 
+@bot.message_handler(commands=['quotations'])
+def quotations(message):
+    bot.send_message(message.chat.id, 'Введите название акции')
+    bot.register_next_step_handler(message, get_title_of_stock)
+
+def get_title_of_stock(message): #после ввода пользователем названия мы попадаем сюда
+    answer = 'Мы нашли введенную акцию!'
+    bot.send_message(message.chat.id, answer)
+
+
 bot.polling(none_stop=True, interval=0)
